@@ -1,5 +1,3 @@
-# About a project on GitHub.
-
-
-<head>Requirements:</head>
-    <body>Placeholder</body>
+# Project Definition
+<head>Placeholder</head>
+<body>Placeholder</body>
