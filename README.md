@@ -14,6 +14,4 @@ The goal is to create a functioning web application for a client. Through ensuri
 
 # App Design
 
-
-
-![Home page](Stored Stuff/I HATE KIDS.png)
+![Home](Stored_Stuff/Homepage.png)
