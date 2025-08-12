@@ -21,3 +21,8 @@ The goal is to create a functioning web application for a client. Through ensuri
 <body> Initial draft example location/reviews design. </body>
 
 ![Review](Stored_Stuff/Reviews.png)
+
+| Design Element      | Choice |
+| :---:        |    :----:   |
+| Typography | Inter Font Used |
+| Colour Scheme | Used Hex Code Colours #61892F #222629 |
