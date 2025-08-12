@@ -14,4 +14,10 @@ The goal is to create a functioning web application for a client. Through ensuri
 
 # App Design
 
+<body> Very first draft Homepage design. </body>
+
 ![Home](Stored_Stuff/Homepage.png)
+
+<body> Initial draft example location/reviews design. </body>
+
+![Review](Stored_Stuff/Reviews.png)
