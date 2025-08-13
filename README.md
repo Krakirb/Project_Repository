@@ -29,6 +29,9 @@ Initial draft example location/reviews design.
 
 # Algorithim Design
 
+## Flowchart:
+
+
 ## Test Case 1:
 
 **Test Case ID:** TC001
@@ -53,18 +56,18 @@ Initial draft example location/reviews design.
 
 **Test Case ID:** TC002
 
-**Test Case Name:** Authenticate succesful user login through Gmail
+**Test Case Name:** User attempts to leave a review
 
-**Preconditions:** User must have a verfied account, and a setup Gmail ID/Account
+**Preconditions:** User must have a verfied account, be signed in, and possess the ability to type
 
 **Test Steps:** 
-  1: Open the Application
-  2: Head to Login Page
-  3: Select 3rd Party Authentication
-  4: Select "Sign in with Google"
-  5: Select Account
-  6: Click Continue
+  1: Open Review Page of location/hotel/other product
+  2: Inputs string of text
+  3: User clicks send
+  4: Username and review are made public
+  5: The system updates to process the review
+  6: Any changes to average rating, number of reviews, etc. are noted
 
-**Expected Result:** User is directed to Profile Page, and is logged in with their Gmail Account
+**Expected Result:** User's review is now public and their review has affected the product's rating
 
 **Priority:** High
