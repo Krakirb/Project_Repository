@@ -31,6 +31,7 @@ Initial draft example location/reviews design.
 
 ## Flowchart:
 
+![Flowchart](Stored_Stuff/Algorthim_Flowchart.png)
 
 ## Test Case 1:
 
