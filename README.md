@@ -72,3 +72,8 @@ Initial draft example location/reviews design.
 **Expected Result:** User's review is now public and their review has affected the product's rating
 
 **Priority:** High
+
+# Setting up development environment
+
+## Competed Steps:
+- 
