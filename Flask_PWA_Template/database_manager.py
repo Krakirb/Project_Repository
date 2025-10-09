@@ -1,14 +1,17 @@
 import sqlite3 as sql
-from typing import Optional, List, Dict, Any
+from typing import Optional, List, Dict, Any, Tuple
 
 DB_PATH = "database/data_source.db"
+
 
 def _get_conn():
     conn = sql.connect(DB_PATH)
     conn.row_factory = sql.Row
     return conn
 
+
 # # Listings / attractions
+
 
 def listListing() -> List[sql.Row]:
     conn = _get_conn()
@@ -17,6 +20,7 @@ def listListing() -> List[sql.Row]:
     conn.close()
     return [dict(r) for r in rows]
 
+
 def get_all_listings() -> List[Dict[str, Any]]:
     conn = _get_conn()
     cur = conn.cursor()
@@ -24,40 +28,70 @@ def get_all_listings() -> List[Dict[str, Any]]:
     conn.close()
     return [dict(r) for r in rows]
 
+
 def get_listing_by_id(listing_id: int) -> Optional[Dict[str, Any]]:
     conn = _get_conn()
     cur = conn.cursor()
-    row = cur.execute("SELECT * FROM Listings WHERE Listings_ID = ?", (listing_id,)).fetchone()
+    row = cur.execute(
+        "SELECT * FROM Listings WHERE Listings_ID = ?", (listing_id,)
+    ).fetchone()
     conn.close()
     return dict(row) if row else None
+
+
+def get_listing_by_category(category_id: int) -> List[Tuple]:
+    conn = _get_conn()
+    cur = conn.cursor()
+    rows = cur.execute(
+        "SELECT * FROM Listings WHERE Category_ID = ?", (category_id,)
+    ).fetchall()
+    conn.close()
+    return rows
+
 
 def get_attraction_by_listing_id(listing_id: int) -> Optional[Dict[str, Any]]:
     conn = _get_conn()
     cur = conn.cursor()
-    row = cur.execute("SELECT * FROM Attractions WHERE Listings_ID = ?", (listing_id,)).fetchone()
+    row = cur.execute(
+        "SELECT * FROM Attractions WHERE Listings_ID = ?", (listing_id,)
+    ).fetchone()
     conn.close()
     return dict(row) if row else None
+
 
 def get_images_for_listing(listing_id: int) -> List[str]:
     conn = _get_conn()
     cur = conn.cursor()
     try:
-        rows = cur.execute("SELECT Image_URL FROM Listings_Images WHERE Listings_ID = ?", (listing_id,)).fetchall()
-        urls = [r['Image_URL'] for r in rows if r['Image_URL']]
+        rows = cur.execute(
+            "SELECT Image_URL FROM Listings_Images WHERE Listings_ID = ?", (listing_id,)
+        ).fetchall()
+        urls = [r["Image_URL"] for r in rows if r["Image_URL"]]
         conn.close()
         return urls
     except sql.Error:
-        row = conn.execute("SELECT Image FROM Listings WHERE Listings_ID = ?", (listing_id,)).fetchone()
+        row = conn.execute(
+            "SELECT Image FROM Listings WHERE Listings_ID = ?", (listing_id,)
+        ).fetchone()
         conn.close()
-        if row and row['Image']:
-            return [row['Image']]
+        if row and row["Image"]:
+            return [row["Image"]]
         return []
+
 
 # User
 
-def create_user(username: str, email: str, password_hash: str,
-                Date_of_birth=None, Address_ID=None, First_name=None,
-                Surname=None, Profile_Photo=None) -> Optional[int]:
+
+def create_user(
+    username: str,
+    email: str,
+    password_hash: str,
+    Date_of_birth=None,
+    Address_ID=None,
+    First_name=None,
+    Surname=None,
+    Profile_Photo=None,
+) -> Optional[int]:
     """
     Insert a new user. Returns new User_ID on success, None on integrity error (duplicate).
     Expects Users table to have a column named password_hash.
@@ -70,13 +104,26 @@ def create_user(username: str, email: str, password_hash: str,
     conn = _get_conn()
     cur = conn.cursor()
     try:
-        cur.execute(sql_insert, (username, password_hash, email, Date_of_birth, Address_ID, First_name, Surname, Profile_Photo))
+        cur.execute(
+            sql_insert,
+            (
+                username,
+                password_hash,
+                email,
+                Date_of_birth,
+                Address_ID,
+                First_name,
+                Surname,
+                Profile_Photo,
+            ),
+        )
         conn.commit()
         return cur.lastrowid
     except sql.IntegrityError:
         return None
     finally:
         conn.close()
+
 
 def get_user_by_username(username: str) -> Optional[Dict[str, Any]]:
     conn = _get_conn()
@@ -86,6 +133,7 @@ def get_user_by_username(username: str) -> Optional[Dict[str, Any]]:
     conn.close()
     return dict(row) if row else None
 
+
 def get_user_by_id(user_id: int) -> Optional[Dict[str, Any]]:
     conn = _get_conn()
     cur = conn.cursor()
@@ -94,13 +142,16 @@ def get_user_by_id(user_id: int) -> Optional[Dict[str, Any]]:
     conn.close()
     return dict(row) if row else None
 
+
 # Optional Stuff I asked AI for
+
 
 def ensure_tables_exist():
     """Create minimal tables if they don't exist (useful for development)."""
     conn = _get_conn()
     cur = conn.cursor()
-    cur.executescript("""
+    cur.executescript(
+        """
     CREATE TABLE IF NOT EXISTS Listings (
       Listings_ID INTEGER PRIMARY KEY,
       Location TEXT,
@@ -142,6 +193,7 @@ def ensure_tables_exist():
       is_active INTEGER DEFAULT 1,
       created_at TEXT DEFAULT (datetime('now'))
     );
-    """)
+    """
+    )
     conn.commit()
     conn.close()

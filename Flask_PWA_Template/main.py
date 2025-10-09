@@ -12,6 +12,9 @@ from flask_login import (
     logout_user,
     current_user,
 )
+
+app = Flask(__name__)
+
 from passlib.hash import bcrypt
 
 import database_manager as db
@@ -71,9 +74,15 @@ def verify_password(plain, hashed):
 @app.route("/index.html", methods=["GET"])
 @app.route("/", methods=["GET", "POST"])
 def index():
-    data = db.get_all_listings()
-    data = [row for row in data if row is not None]
-    return render_template("index.html", content=data)
+    attractions = db.get_listing_by_category(1)
+    restaurants = db.get_listing_by_category(2)
+    accommodations = db.get_listing_by_category(3)
+    return render_template(
+        "index.html",
+        attractions=attractions,
+        restaurants=restaurants,
+        accommodations=accommodations,
+    )
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -166,18 +175,12 @@ def logout():
     return redirect(url_for("index"))
 
 
-@app.route("/attraction/<int:listing_id>")
-def attraction_detail(listing_id):
+@app.route("/listing/<int:listing_id>")
+def listing_detail(listing_id):
     listing = db.get_listing_by_id(listing_id)
-    attraction = db.get_attraction_by_listing_id(listing_id)
     images = db.get_images_for_listing(listing_id)
 
-    if not listing or not attraction:
-        return abort(404)
-
-    return render_template(
-        "attractions.html", listing=listing, attraction=attraction, images=images
-    )
+    return render_template("listing.html", listing=listing, images=images)
 
 
 from flask import render_template, abort

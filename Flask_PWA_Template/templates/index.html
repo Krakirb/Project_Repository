@@ -1,28 +1,69 @@
 {% extends 'layout.html' %} {% block content %}
-<div class= "line">
-</div>
+<div class="line"></div>
 
 <section class="search">
-  <div class= "search-content"></div>
-    <h2>Start your journey</h2>
-    <form class="search-form" method="GET" action="/search">
-      <input type="text" name="q" placeholder="Search..." />
-      <button type="submit">Search</button>
-    </form>
+  <div class="search-content"></div>
+  <h2>Start your journey</h2>
+  <form class="search-form" method="GET" action="/search">
+    <input type="text" name="q" placeholder="Search..." />
+    <button type="submit">Search</button>
+  </form>
 </section>
-
+<h2>Attractions</h2>
 <div class="container">
-    {% for row in content %}
-<div class="card">
-  <img
-    class="card-image"
-    src= "{{ row[5] }}"
-    alt="Image of {{ row[1] }} not loaded."
-  />
-  <h1 class="card-name">{{ row[1] }}</h1>
-  <p class="card-about">{{ row[3] }}</p>
-  <a href="{{ url_for('attraction_detail', listing_id=row[0]) }}">Read more</a>
+  {% for row in attractions %}
+  <a
+    class="card-link-wrapper"
+    href="{{ url_for('listing_detail', listing_id=row['Listings_ID']) }}"
+  >
+    <div class="card">
+      <img
+        class="card-image"
+        src="{{ row['Image'] }}"
+        alt="Image of {{ row['Title'] }} not loaded."
+      />
+      <h1 class="card-name">{{ row['Title'] }}</h1>
+      <p class="card-about">{{ row['Description'] }}</p>
+    </div>
+  </a>
+  {% endfor %}
 </div>
-{% endfor %}
+<h2>Restaurants</h2>
+<div class="container">
+  {% for row in restaurants %}
+  <a
+    class="card-link-wrapper"
+    href="{{ url_for('listing_detail', listing_id=row['Listings_ID']) }}"
+  >
+    <div class="card">
+      <img
+        class="card-image"
+        src="{{ row['Image'] }}"
+        alt="Image of {{ row['Title'] }} not loaded."
+      />
+      <h1 class="card-name">{{ row['Title'] }}</h1>
+      <p class="card-about">{{ row['Description'] }}</p>
+    </div>
+  </a>
+  {% endfor %}
+</div>
+<h2>Accommodations</h2>
+<div class="container">
+  {% for row in accommodations %}
+  <a
+    class="card-link-wrapper"
+    href="{{ url_for('listing_detail', listing_id=row['Listings_ID']) }}"
+  >
+    <div class="card">
+      <img
+        class="card-image"
+        src="{{ row['Image'] }}"
+        alt="Image of {{ row['Title'] }} not loaded."
+      />
+      <h1 class="card-name">{{ row['Title'] }}</h1>
+      <p class="card-about">{{ row['Description'] }}</p>
+    </div>
+  </a>
+  {% endfor %}
 </div>
 {% endblock %}

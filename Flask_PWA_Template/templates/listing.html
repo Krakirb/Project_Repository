@@ -1,0 +1,21 @@
+{% extends 'layout.html' %} {% block content %}
+
+<div class="gallery">
+  {% for url in images %}
+  <div class="gallery-item">
+    <img src="{{ url }}" alt="Photo of {{ listing.Title }} #{{ loop.index }}" />
+  </div>
+  {% endfor %}
+</div>
+
+<div class="hero-info">
+  <h1>{{ listing.Title or listing.Title }}</h1>
+  <p class="location">{{ listing.Location }}</p>
+  <p class="entry-fee">${{ listing.Entry_Fee }}</p>
+  <p class="opening-hours">Opening Hours: {{ listing.Opening_Hours }}</p>
+  <p class="description">{{ listing.Description }}</p>
+  <p class="price">Listing Price: ${{ listing.Price }}</p>
+  <!-- Add more fields as needed -->
+</div>
+
+{% endblock %}
