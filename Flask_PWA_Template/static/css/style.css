@@ -1,0 +1,346 @@
+.location {
+  color: #024950;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+  background-color: #ffffff;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  padding-right: 8px;
+  padding-left: 8px;
+}
+
+nav a {
+  margin-right: 16px;
+}
+
+nav img {
+  width: 300px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+}
+
+nav li {
+  margin-right: 1rem;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+nav ul li a {
+  text-decoration-line: none;
+  text-transform: uppercase;
+  color: #393b45;
+}
+
+nav ul li a:hover {
+  color: #14e6dd;
+}
+
+nav h1 {
+  color: #106d69;
+  margin-bottom: 0.5rem;
+}
+
+nav div {
+  text-align: right;
+  border-radius: 4 px;
+  border-color: #024950;
+}
+
+nav button {
+  background-color: #024950;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 8px;
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+input[type="text"] {
+  padding: 8px;
+  border: 1px solid #cccccc;
+  border-radius: 16px;
+  width: 250px;
+}
+
+.login-container{
+  max-width: 400px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border: 4px solid #003135;
+  border-radius: 24px;
+  box-shadow: 0 16px 24px rgba(0, 0, 0, 0.1);
+
+}
+
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333333;
+}
+
+.login-form .form-group {
+  margin-bottom: 1rem;
+  padding-right: 8px;
+}
+
+.login-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #555555;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.login-form input {
+  width: 95%;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.login-form input:focus {
+  outline: none;
+  border-color: #4a90e2;
+}
+
+body {
+  margin: 0;
+  padding: 0; 
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+}
+
+.product-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.product-info {
+  padding: 2rem;
+}
+
+.product-info h1 {
+  margin: 0 0 0.5rem;
+  color: #003135;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.product-info .location {
+  margin: 0 0 1rem;
+  color: #001f24;
+  font-size: 0.9rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.product-info .entry-fee {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #001f24;
+  margin-bottom: 1.5rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.product-info .opening-hours {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #001f24;
+  margin-bottom: 1.5rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.booking-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 2rem;
+}
+
+.booking-section label {
+  display: block;
+  font-size: 0.9rem;
+  color: #024950;
+  margin-bottom: 0.3rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.booking-section input,
+.booking-section select {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #ffffff;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.booking-section button {
+  grid-column: span 2;
+  padding: 0.8rem;
+  background-color: #003135;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.booking-section button:hover {
+  background-color: #001f24;
+}
+
+.attraction-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.attraction-image img {
+  width: 400px;
+  height: auto;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.btn-login {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 1rem;
+  background-color: #024950;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.btn-login:hover {
+  background-color: #357ab8;
+}
+
+button[type="submit"]{
+  padding: 8px;
+  border: 1px solid #cccccc;
+  border-radius: 16px;
+}
+
+body {
+  margin-top: 8px;
+  margin-left: 0px;
+  margin-right: 0px;
+  overflow-x: hidden;
+}
+
+section h2 {
+  color: #fff;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  grid-gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  padding: 1rem;
+  background-color: #fff;
+  width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  background: #fff;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  border-radius: 10px;
+  margin: 0;
+  overflow: hidden;
+}
+
+.card-image {
+  width: 100%;
+  height: 15rem;
+  object-fit: cover;
+}
+
+.card-name {
+  color: #222;
+  font-weight: 700;
+  text-transform: capitalize;
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+}
+
+.card-about {
+  text-overflow: ellipsis;
+  width: 15rem;
+  white-space: nowrap;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.btn {
+  border: none;
+  background: none;
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px rgba(21, 21, 21, 0.1);
+  cursor: pointer;
+  font-size: 1.25rem;
+  margin: 0 1rem;
+  padding: 0.25rem 2rem;
+  transition: all 0.25s ease-in-out;
+  background: hsl(110, 21%, 93%);
+  color: hsl(141, 100%, 22%);
+  margin-bottom: 1rem;
+}
+
+.btn:focus,
+.btn:hover {
+  box-shadow: 1px 1px 2px rgba(21, 21, 21, 0.2);
+  background: hsl(111, 21%, 86%);
+}
+
+.about-container {
+  font-size: 1.25rem;
+  margin-top: 2rem;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+h2 {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center;
+  margin-top: 8 px;
+}
+
+.search {
+  background-color: #024950;
+  padding: 3rem 1rem;
+  text-align: center;
+  color: white;
+}

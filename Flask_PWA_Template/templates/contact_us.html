@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+  <div class="gallery">
+    {% for url in images %}
+      <div class="gallery-item">
+        <img src="{{ url }}" alt="Photo of {{ attraction.Title }} #{{ loop.index }}">
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="hero-info">
+    <h1>{{ attraction.Title }}</h1>
+    <p class="location">{{ listing.Name }} • {{ listing.Description }}</p>
+    <p class="entry-fee">${{ attraction.Entry_Fee }} per person</p>
+    <p class="opening-hours">Opening Hours: {{ attraction.Opening_Hours }}</p>
+    <p class="other-info">{{ attraction.Other_Info }}</p>
+  
+    <form class="booking-section" method="POST" action="/book/{{ content[0][3] }}">
+      <div>
+        <label for="date">Choose date</label>
+        <input type="date" id="date" name="date" required>
+      </div>
+      <div>
+        <label for="guests">Guests</label>
+        <select id="guests" name="guests">
+          <option value="1">1 guest</option>
+          <option value="2">2 guests</option>
+          <option value="3">3 guests</option>
+          <option value="4">4 guests</option>
+        </select>
+      </div>
+      <button type="submit">Book Now</button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
