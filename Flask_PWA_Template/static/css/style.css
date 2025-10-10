@@ -139,103 +139,104 @@ input[type="text"] {
 }
 
 body {
-  margin: 0;
   padding: 0; 
   font-family: Arial, sans-serif;
   background-color: #fff;
+  margin-top: 8px;
+  margin-left: 0px;
+  margin-right: 0px;
+  overflow-x: hidden;
 }
 
-.product-image img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.product-info {
-  padding: 2rem;
-}
-
-.product-info h1 {
-  margin: 0 0 0.5rem;
-  color: #003135;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-
-.product-info .location {
-  margin: 0 0 1rem;
-  color: #001f24;
-  font-size: 0.9rem;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-
-.product-info .entry-fee {
-  font-size: 1.25rem;
-  font-weight: bold;
-  color: #001f24;
-  margin-bottom: 1.5rem;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-
-.product-info .opening-hours {
-  font-size: 1.25rem;
-  font-weight: bold;
-  color: #001f24;
-  margin-bottom: 1.5rem;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-
-.booking-section {
+.gallery {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin: 40px auto;
+  max-width: 1236px;
+  padding: 0 16px;
 }
 
-.booking-section label {
-  display: block;
-  font-size: 0.9rem;
-  color: #024950;
-  margin-bottom: 0.3rem;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+.gallery-item {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.booking-section input,
-.booking-section select {
+.gallery-item:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+}
+
+.gallery-item img {
   width: 100%;
-  padding: 0.6rem;
-  border: 1px solid #ffffff;
-  border-radius: 4px;
-  font-size: 0.95rem;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 12px;
 }
 
-.booking-section button {
-  grid-column: span 2;
-  padding: 0.8rem;
-  background-color: #003135;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  cursor: pointer;
-  transition: background-color 0.2s;
+.hero-info {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
 }
 
-.booking-section button:hover {
-  background-color: #001f24;
+.hero-info h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #003135;
 }
 
-.attraction-container {
+.hero-info p {
+  margin: 6px 0;
+  font-size: 1.1rem;
+  color: #003135;
+}
+
+.hero-info .price,
+.hero-info .entry-fee {
+  color: #024950;
+  font-weight: bold;
+}
+
+.post-container {
+  max-width: 800px;
+  margin: 40px auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 16px;
 }
 
-.attraction-image img {
-  width: 400px;
-  height: auto;
-  display: block;
-  margin-bottom: 1rem;
+.post-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 14px rgba(0, 0, 0, 0.2);
+}
+
+.post-card-username {
+  font-weight: bold;
+  color: #333;
+}
+
+.post-card-date {
+  font-size: 0.9rem;
+  color: #0fa4af;
+  margin-bottom: 8px;
+}
+
+.post-card-text {
+  font-size: 1rem;
+  color: #444;
+  line-height: 1.4;
 }
 
 .btn-login {
@@ -261,13 +262,6 @@ button[type="submit"]{
   padding: 8px;
   border: 1px solid #cccccc;
   border-radius: 16px;
-}
-
-body {
-  margin-top: 8px;
-  margin-left: 0px;
-  margin-right: 0px;
-  overflow-x: hidden;
 }
 
 section h2 {

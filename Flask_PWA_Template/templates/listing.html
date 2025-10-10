@@ -11,11 +11,19 @@
 <div class="hero-info">
   <h1>{{ listing.Title or listing.Title }}</h1>
   <p class="location">{{ listing.Location }}</p>
-  <p class="entry-fee">${{ listing.Entry_Fee }}</p>
+  <p class="price">${{ listing.Price }}</p>
   <p class="opening-hours">Opening Hours: {{ listing.Opening_Hours }}</p>
   <p class="description">{{ listing.Description }}</p>
-  <p class="price">Listing Price: ${{ listing.Price }}</p>
-  <!-- Add more fields as needed -->
+</div>
+
+<div class="post-container">
+  {% for row in posts %}
+    <div class="post-card">
+      <p class="post-card-username">{{ row[''] }}</p>
+      <p class="post-card-date">{{ row['Date'] }}</p>
+      <p class="post-card-text">{{ row['Text'] }}</p>
+    </div>
+  {% endfor %}
 </div>
 
 {% endblock %}

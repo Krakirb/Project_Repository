@@ -180,8 +180,9 @@ def logout():
 def listing_detail(listing_id):
     listing = db.get_listing_by_id(listing_id)
     images = db.get_images_for_listing(listing_id)
+    posts = db.get_post_by_listing(listing_id)
 
-    return render_template("listing.html", listing=listing, images=images)
+    return render_template("listing.html", listing=listing, images=images, posts=posts)
 
 
 from flask import render_template, abort

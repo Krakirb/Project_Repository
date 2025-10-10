@@ -78,6 +78,17 @@ def get_images_for_listing(listing_id: int) -> List[str]:
             return [row["Image"]]
         return []
 
+# Posts for Listing
+
+def get_post_by_listing(listings_id: int) -> List[Tuple]:
+    conn = _get_conn()
+    cur = conn.cursor()
+    rows = cur.execute(
+        "SELECT Text,Post_Rating,Date,Likes_Count,Comments_Count,Username FROM Posts JOIN Users ON Posts.User_ID = Users.User_ID WHERE Listings_ID = ?", (listings_id,)
+    ).fetchall()
+    conn.close()
+    return rows
+
 
 # User
 
