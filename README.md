@@ -77,3 +77,16 @@ Initial draft example location/reviews design.
 
 ## Competed Steps:
 - 
+
+
+# App Design
+
+TODO (10/10):
+- Limit number of listings on main page
+- Listings by type
+- Profile Page
+- Fix Date
+- Integrate Rego
+- Business Profile add listings
+- (Maybe) Search Bar for Listing
+- Edit own reviews
