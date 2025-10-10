@@ -176,6 +176,36 @@ def logout():
     return redirect(url_for("index"))
 
 
+@app.route("/listing/<int:listing_id>/add_review", methods=["GET"])
+def review(listing_id):
+    listing = db.get_listing_by_id(listing_id)
+    if listing is None:
+        flash("Listing not found.", "danger")
+    return render_template("review.html", listing=listing)
+
+
+@app.route("/listing/<int:listing_id>/add_review", methods=["POST"])
+def add_review(listing_id):
+    if not current_user.is_authenticated:
+        flash("You must be logged in to add a review.", "danger")
+        return redirect(url_for("log_in"))
+
+    rating = request.form.get("rating")
+    comment = request.form.get("comment", "").strip()
+
+    try:
+        rating = int(rating)
+        if rating < 1 or rating > 5:
+            raise ValueError
+    except (TypeError, ValueError):
+        flash("Invalid rating. Please provide a rating between 1 and 5.", "danger")
+        return redirect(url_for("listing_detail", listing_id=listing_id))
+
+    db.add_post(user_id=current_user.id, listing_id=listing_id, rating=rating, comment=comment)
+    flash("Review added successfully.", "success")
+    return redirect(url_for("listing_detail", listing_id=listing_id))
+
+
 @app.route("/listing/<int:listing_id>")
 def listing_detail(listing_id):
     listing = db.get_listing_by_id(listing_id)
@@ -184,7 +214,6 @@ def listing_detail(listing_id):
     average_rating = db.get_average_rating(listing_id)
 
     return render_template("listing.html", listing=listing, images=images, posts=posts, average_rating=average_rating)
-
 
 from flask import render_template, abort
 import os

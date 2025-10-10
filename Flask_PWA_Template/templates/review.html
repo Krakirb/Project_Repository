@@ -1,1 +1,53 @@
-{% extends 'layout.html' %} {% block content %}
+{% extends 'layout.html' %}
+{% block content %}
+<div class="review-page" style="max-width:800px;margin:2rem auto;">
+  <h2>Write a review for "{{ listing['Title'] if listing is mapping else listing.Title }}"</h2>
+
+  {% if not current_user.is_authenticated %}
+    <p>You must <a href="{{ url_for('log_in') }}">log in</a> to post a review.</p>
+  {% endif %}
+
+  <form method="POST" action="{{ url_for('review', listing_id=listing['Listings_ID'] if listing is mapping else listing.Listings_ID) }}">
+    <label for="rating">Rating</label>
+        <!-- Circles rating input -->
+    <div class="rating" id="rating-circles">
+      <span class="circle" data-value="1"></span>
+      <span class="circle" data-value="2"></span>
+      <span class="circle" data-value="3"></span>
+      <span class="circle" data-value="4"></span>
+      <span class="circle" data-value="5"></span>
+    </div>
+    <div>
+      <input type="hidden" name="rating" id="rating-value" value="0" />
+    </div>
+    <div>
+      <label for="comment">Your review</label>
+    </div>
+    <div>
+      <textarea id="comment" name="comment" rows="6" required></textarea>
+    </div>
+    <div style="margin-top:1rem;">
+      <button type="submit" class="btn btn-primary">Submit review</button>
+      <a class="btn btn-secondary" href="{{ url_for('listing_detail', listing_id=listing['Listings_ID'] if listing is mapping else listing.Listings_ID) }}">Cancel</a>
+    </div>
+
+    <script>
+      const circles = document.querySelectorAll('#rating-circles .circle:not(.disabled)');
+      const ratingInput = document.getElementById('rating-value');
+
+      circles.forEach(circle => {
+        circle.addEventListener('click', () => {
+          const value = parseInt(circle.dataset.value);
+          ratingInput.value = value;
+
+          // Highlight selected and previous circles
+          circles.forEach(c => {
+            c.classList.toggle('full', parseInt(c.dataset.value) <= value);
+            c.classList.toggle('empty', parseInt(c.dataset.value) > value);
+          });
+        });
+      });
+    </script>
+  </form>
+</div>
+{% endblock %}

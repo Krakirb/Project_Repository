@@ -1,4 +1,5 @@
 import sqlite3 as sql
+import os
 from typing import Optional, List, Dict, Any, Tuple
 
 DB_PATH = "C:/Users/Jason/source/repos/Project_Repo/Project_Repository/Flask_PWA_Template/database/data_source.db"
@@ -97,6 +98,22 @@ def get_post_by_listing(listings_id: int) -> List[Tuple]:
     conn.close()
     return rows
 
+def add_post(user_id, listing_id, rating, comment):
+    """Insert a new review (post) into the Posts table."""
+    query = """
+        INSERT INTO Posts (User_ID, Text, Post_Rating, Date, Reply_To_Post_ID, Likes_Count, Comments_Count, Images, Listings_ID)
+        VALUES (?, ?, ?, CURRENT_DATE, NULL, 0, 0, NULL, ?)
+    """
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute(query, (user_id, comment, rating, listing_id))
+    conn.commit()
+    conn.close()
+
+def get_db_connection():
+    conn = sql.connect(DB_PATH)
+    conn.row_factory = sql.Row
+    return conn
 
 # User
 
@@ -161,58 +178,3 @@ def get_user_by_id(user_id: int) -> Optional[Dict[str, Any]]:
     conn.close()
     return dict(row) if row else None
 
-
-# Optional Stuff I asked AI for
-
-
-def ensure_tables_exist():
-    """Create minimal tables if they don't exist (useful for development)."""
-    conn = _get_conn()
-    cur = conn.cursor()
-    cur.executescript(
-        """
-    CREATE TABLE IF NOT EXISTS Listings (
-      Listings_ID INTEGER PRIMARY KEY,
-      Location TEXT,
-      Price NUMERIC,
-      Title TEXT,
-      Description TEXT,
-      Image TEXT,
-      Category_ID INTEGER,
-      Date_entered NUMERIC,
-      Link_URL TEXT
-    );
-
-    CREATE TABLE IF NOT EXISTS Attractions (
-      Listings_ID INTEGER PRIMARY KEY REFERENCES Listings(Listings_ID) ON DELETE CASCADE,
-      Type TEXT,
-      Title TEXT,
-      Entry_Fee NUMERIC,
-      Opening_Hours TEXT,
-      Description TEXT,
-      Address_ID INTEGER
-    );
-
-    CREATE TABLE IF NOT EXISTS Listings_Images (
-      Image_ID INTEGER PRIMARY KEY,
-      Listings_ID INTEGER NOT NULL REFERENCES Listings(Listings_ID) ON DELETE CASCADE,
-      Image_URL TEXT NOT NULL
-    );
-
-    CREATE TABLE IF NOT EXISTS Users (
-      User_ID INTEGER PRIMARY KEY,
-      Username TEXT UNIQUE,
-      password_hash TEXT,
-      Email TEXT UNIQUE,
-      Date_of_birth NUMERIC,
-      Address_ID INTEGER,
-      First_name TEXT,
-      Surname TEXT,
-      Profile_Photo BLOB,
-      is_active INTEGER DEFAULT 1,
-      created_at TEXT DEFAULT (datetime('now'))
-    );
-    """
-    )
-    conn.commit()
-    conn.close()
