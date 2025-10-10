@@ -10,6 +10,22 @@
 
 <div class="hero-info">
   <h1>{{ listing.Title or listing.Title }}</h1>
+  
+    {% if average_rating is not none %}
+    <div class="rating-circles">
+    {% for i in range(1, 6) %}
+      {% if average_rating >= i %}
+        <div class="circle full"></div>
+      {% elif average_rating + 0.5 >= i %}
+        <div class="circle half"></div>
+      {% else %}
+        <div class="circle empty"></div>
+      {% endif %}
+    {% endfor %}
+    <span class="rating-text">{{ average_rating | round(1) }}/5</span>
+    {% endif %}
+  </div>
+
   <p class="location">{{ listing.Location }}</p>
   <p class="price">${{ listing.Price }}</p>
   <p class="opening-hours">Opening Hours: {{ listing.Opening_Hours }}</p>
@@ -19,6 +35,15 @@
 <div class="post-container">
   {% for row in posts %}
     <div class="post-card">
+      <div class="rating">
+      {% for i in range(1, 6) %}
+          {% if i <= row['Post_Rating'] %}
+            <span class="rating-circle filled"></span>
+          {% else %}
+            <span class="rating-circle"></span>
+          {% endif %}
+        {% endfor %}
+      </div>
       <p class="post-card-username">{{ row[''] }}</p>
       <p class="post-card-date">{{ row['Date'] }}</p>
       <p class="post-card-text">{{ row['Text'] }}</p>

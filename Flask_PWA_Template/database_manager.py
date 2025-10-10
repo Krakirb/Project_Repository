@@ -10,7 +10,7 @@ def _get_conn():
     return conn
 
 
-# # Listings / attractions
+# Listings / attractions
 
 
 def listListing() -> List[sql.Row]:
@@ -58,6 +58,14 @@ def get_attraction_by_listing_id(listing_id: int) -> Optional[Dict[str, Any]]:
     conn.close()
     return dict(row) if row else None
 
+def get_average_rating(listing_id: int) -> Optional[float]:
+    conn = _get_conn()
+    cur = conn.cursor()
+    row = cur.execute(
+        "SELECT AVG(Post_Rating) as avg_rating FROM Posts WHERE Listings_ID = ?", (listing_id,)
+    ).fetchone()
+    conn.close()
+    return row["avg_rating"] if row and row["avg_rating"] is not None else None
 
 def get_images_for_listing(listing_id: int) -> List[str]:
     conn = _get_conn()

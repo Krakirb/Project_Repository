@@ -6,7 +6,7 @@
 main {
   width: 1236px;
   margin: 0 auto;
-  padding: 0 20px; 
+  padding: 0 20px;
   padding-top: 94px;
 }
 
@@ -19,7 +19,7 @@ nav {
   background-color: #ffffff;
   padding: 16px 8px;
   top: 0;
-  z-index: 1000;  
+  z-index: 1000;
   width: 1236px;
   margin: 0 auto;
 }
@@ -94,7 +94,7 @@ input[type="text"] {
   width: 250px;
 }
 
-.login-container{
+.login-container {
   max-width: 400px;
   margin: 3rem auto;
   padding: 2rem;
@@ -139,7 +139,7 @@ input[type="text"] {
 }
 
 body {
-  padding: 0; 
+  padding: 0;
   font-family: Arial, sans-serif;
   background-color: #fff;
   margin-top: 8px;
@@ -164,11 +164,6 @@ body {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.gallery-item:hover {
-  transform: scale(1.03);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
-}
-
 .gallery-item img {
   width: 100%;
   height: 220px;
@@ -180,18 +175,18 @@ body {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-  text-align: center;
+  text-align: left;
 }
 
 .hero-info h1 {
-  font-size: 2rem;
+  font-size: 48px;
   font-weight: bold;
   color: #003135;
 }
 
 .hero-info p {
   margin: 6px 0;
-  font-size: 1.1rem;
+  font-size: 16px;
   color: #003135;
 }
 
@@ -199,6 +194,63 @@ body {
 .hero-info .entry-fee {
   color: #024950;
   font-weight: bold;
+}
+
+.rating {
+  display: flex;
+  gap: 4px;
+  /* space between circles */
+}
+
+.rating-circle {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid #024950;
+  /* outline color */
+  background-color: transparent;
+  /* empty circle */
+}
+
+.rating-circle.filled {
+  background-color: #024950;
+  /* filled circle color */
+}
+
+.circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #ccc;
+  /* empty circle */
+  overflow: hidden;
+  display: inline-block;
+  margin-right: 4px;
+  position: relative;
+}
+
+.circle-fill {
+  height: 100%;
+  background-color: #024950;
+  /* filled circle */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  /* dynamically set in template */
+  transition: width 0.3s ease;
+}
+
+.circle.full {
+  background: #024950;
+}
+
+.circle.half {
+  background: linear-gradient(to right, #024950 50%, #ccc 50%);
+}
+
+.circle.empty {
+  background: #ccc;
 }
 
 .post-container {
@@ -217,26 +269,23 @@ body {
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.post-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 14px rgba(0, 0, 0, 0.2);
-}
-
 .post-card-username {
   font-weight: bold;
   color: #333;
+  font-size: 16px;
 }
 
 .post-card-date {
   font-size: 0.9rem;
   color: #0fa4af;
   margin-bottom: 8px;
+  font-size: 16px;
 }
 
 .post-card-text {
-  font-size: 1rem;
   color: #444;
   line-height: 1.4;
+  font-size: 16px;
 }
 
 .btn-login {
@@ -248,8 +297,7 @@ body {
   color: #ffffff;
   border: none;
   border-radius: 4px;
-  font-size: 1rem
-  cursor: pointer;
+  font-size: 1rem cursor: pointer;
   transition: background-color 0.2s;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
@@ -258,7 +306,7 @@ body {
   background-color: #357ab8;
 }
 
-button[type="submit"]{
+button[type="submit"] {
   padding: 8px;
   border: 1px solid #cccccc;
   border-radius: 16px;
@@ -367,7 +415,7 @@ h2 {
   color: white;
 }
 
-.search button{
+.search button {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   border: none;
   color: #003135;
