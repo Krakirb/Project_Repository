@@ -1,7 +1,7 @@
 import sqlite3 as sql
 from typing import Optional, List, Dict, Any, Tuple
 
-DB_PATH = "database/data_source.db"
+DB_PATH = "C:/Users/Jason/source/repos/Project_Repo/Project_Repository/Flask_PWA_Template/database/data_source.db"
 
 
 def _get_conn():

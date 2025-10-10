@@ -2,7 +2,7 @@ import os
 import logging
 from urllib.parse import urlparse, urljoin
 
-from flask import Flask, render_template, request, redirect, url_for, flash, abort
+from flask import Flask, render_template, request, redirect, url_for, flash, abort, session
 from jinja2 import TemplateNotFound
 from flask_login import (
     LoginManager,
@@ -13,7 +13,11 @@ from flask_login import (
     current_user,
 )
 
-app = Flask(__name__)
+app = Flask(__name__)   
+app.config['SECRET_KEY'] = 'your_unique_and_secret_key_here'
+app.config["SESSION_COOKIE_HTTPONLY"] = True
+app.config["REMEMBER_COOKIE_HTTPONLY"] = True
+app.config["SESSION_COOKIE_SECURE"] = os.environ.get("FLASK_ENV") == "production"
 
 from passlib.hash import bcrypt
 
@@ -21,15 +25,11 @@ import database_manager as db
 
 
 def is_safe_url(target):
-    ref_url = urlparse(request.host_url)
+    ref_url = urlparse(request.host_url)    
     test_url = urlparse(urljoin(request.host_url, target))
     return test_url.scheme in ("http", "https") and ref_url.netloc == test_url.netloc
 
 
-app = Flask(__name__)
-app.config["SESSION_COOKIE_HTTPONLY"] = True
-app.config["REMEMBER_COOKIE_HTTPONLY"] = True
-app.config["SESSION_COOKIE_SECURE"] = os.environ.get("FLASK_ENV") == "production"
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -43,7 +43,7 @@ class User(UserMixin):
         self.id = row["User_ID"]
         self.username = row.get("Username")
         self.email = row.get("Email")
-        self.is_active = bool(row.get("is_active", 1))
+
 
 
 @login_manager.user_loader
@@ -66,7 +66,8 @@ def verify_password(plain, hashed):
     if not hashed:
         return False
     try:
-        return bcrypt.verify(plain, hashed)
+        return (plain == hashed)
+        #return bcrypt.verify(plain, hashed)
     except Exception:
         return False
 
@@ -139,7 +140,7 @@ def log_in():
             return redirect(url_for("log_in"))
 
         # prefer password_hash only
-        stored_hash = row.get("password_hash")
+        stored_hash = row.get("Password")
         if not stored_hash:
             logger.info(
                 "Login attempt for user=%s but account missing password_hash", username
