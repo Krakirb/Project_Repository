@@ -168,7 +168,7 @@ def log_in():
     return render_template("log_in.html")
 
 
-@app.route("/logout")
+@app.route("/log_out")
 @login_required
 def logout():
     logout_user()

@@ -3,6 +3,13 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+main {
+  width: 1236px;
+  margin: 0 auto;
+  padding: 0 20px; 
+  padding-top: 94px;
+}
+
 nav {
   display: flex;
   justify-content: space-between;
@@ -10,10 +17,21 @@ nav {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: bold;
   background-color: #ffffff;
-  padding-top: 16px;
-  padding-bottom: 16px;
-  padding-right: 8px;
-  padding-left: 8px;
+  padding: 16px 8px;
+  top: 0;
+  z-index: 1000;  
+  width: 1236px;
+  margin: 0 auto;
+}
+
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ffffff;
+  border-bottom: #999999 1px solid;
+  z-index: 999;
 }
 
 nav a {
