@@ -74,7 +74,7 @@ nav div {
   border-color: #024950;
 }
 
-nav button {
+nav button, main button, main .btn {
   background-color: #024950;
   border: none;
   color: white;
@@ -85,6 +85,11 @@ nav button {
   border-radius: 8px;
   font-weight: bold;
   margin-right: 8px;
+  text-decoration: none;
+}
+
+nav button:hover, main button:hover, main .btn:hover {
+  background-color: #357ab8;
 }
 
 input[type="text"] {
@@ -111,7 +116,7 @@ input[type="text"] {
   color: #333333;
 }
 
-.login-form .form-group {
+.login-form, .form-group {
   margin-bottom: 1rem;
   padding-right: 8px;
 }
@@ -199,7 +204,6 @@ body {
 .rating {
   display: flex;
   gap: 4px;
-  /* space between circles */
 }
 
 .rating-circle {
@@ -207,14 +211,11 @@ body {
   height: 16px;
   border-radius: 50%;
   border: 2px solid #024950;
-  /* outline color */
   background-color: transparent;
-  /* empty circle */
 }
 
 .rating-circle.filled {
   background-color: #024950;
-  /* filled circle color */
 }
 
 .circle {
@@ -222,7 +223,6 @@ body {
   height: 20px;
   border-radius: 50%;
   background-color: #ccc;
-  /* empty circle */
   overflow: hidden;
   display: inline-block;
   margin-right: 4px;
@@ -232,12 +232,10 @@ body {
 .circle-fill {
   height: 100%;
   background-color: #024950;
-  /* filled circle */
   position: absolute;
   top: 0;
   left: 0;
   width: 0;
-  /* dynamically set in template */
   transition: width 0.3s ease;
 }
 
@@ -288,6 +286,56 @@ body {
   font-size: 16px;
 }
 
+.review-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 2rem;
+  background-color: #fafafa;
+  min-height: 80vh;
+}
+
+.review-card {
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  padding: 2rem 2.5rem;
+  width: 100%;
+  max-width: 700px;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.review-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.review-title {
+  font-size: 1.8rem;
+  margin-bottom: 1.2rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.review-page .form-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #333;
+  padding: 16px 0px 8px;
+}
+
+.review-page textarea {
+  width: 750px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 0.75rem;
+  font-size: 1rem;
+  resize: vertical;
+  transition: border-color 0.2s;
+}
+
 .btn-login {
   display: block;
   width: 100%;
@@ -306,11 +354,13 @@ body {
   background-color: #357ab8;
 }
 
+/*
 button[type="submit"] {
-  padding: 8px;
+  padding: 8px 16px;
   border: 1px solid #cccccc;
   border-radius: 16px;
 }
+*/
 
 section h2 {
   color: #fff;
@@ -318,7 +368,7 @@ section h2 {
 
 .container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   grid-gap: 1rem;
   justify-content: center;
   align-items: center;
@@ -334,7 +384,7 @@ section h2 {
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 100%;
+  width: 350px;
   background: #fff;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   border-radius: 10px;
@@ -360,6 +410,8 @@ section h2 {
 }
 
 .card-link-wrapper {
+  flex: 0 0 calc(33.333% - 1rem);
+  width: 350px;
   display: block;
   text-decoration: none;
   color: inherit;
@@ -417,12 +469,13 @@ h2 {
 
 .search button {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  border: none;
-  color: #003135;
+  border: solid 1px #cccccc;
+  color: #ffffff;
   padding: 8px 16px;
   text-align: center;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  border-radius: 16px;
 }
 
 .search button:hover {

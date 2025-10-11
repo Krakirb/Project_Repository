@@ -34,9 +34,11 @@
 
 <div class="post-container">
   {# listing.html, inside hero-info or near posts #}
-<a class="btn btn-primary" href="{{ url_for('add_review', listing_id=listing['Listings_ID'])}}">
-  Write a review
-</a>
+  <div>
+    <a class="btn btn-primary" href="{{ url_for('add_review', listing_id=listing['Listings_ID'])}}">
+      Write a review
+    </a>
+  </div>
 
   {% for row in posts %}
     <div class="post-card">

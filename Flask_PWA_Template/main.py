@@ -62,22 +62,30 @@ def hash_password(plain):
     return bcrypt.using(rounds=12).hash(plain)
 
 
-def verify_password(plain, hashed):
+def verify_password(plain, hashed, storedpassword):
     if not hashed:
-        return False
+        if (plain == storedpassword):
+            return True
+        else:
+            return False
     try:
-        return (plain == hashed)
-        #return bcrypt.verify(plain, hashed)
+        return bcrypt.verify(plain, hashed)
     except Exception:
         return False
 
 
-@app.route("/index.html", methods=["GET"])
+@app.route("/index.html", methods=["GET", "POST"])
 @app.route("/", methods=["GET", "POST"])
 def index():
-    attractions = db.get_listing_by_category(1)
-    restaurants = db.get_listing_by_category(2)
-    accommodations = db.get_listing_by_category(3)
+    if request.method == "POST":
+        searchtext = (request.form.get("searchtext") or "").strip()
+        attractions = db.get_listing_by_category_and_search(1,searchtext=searchtext)
+        restaurants = db.get_listing_by_category_and_search(2,searchtext=searchtext)
+        accommodations = db.get_listing_by_category_and_search(3,searchtext=searchtext)
+    else:
+        attractions = db.get_listing_by_category(1)
+        restaurants = db.get_listing_by_category(2)
+        accommodations = db.get_listing_by_category(3)
     return render_template(
         "index.html",
         attractions=attractions,
@@ -140,8 +148,9 @@ def log_in():
             return redirect(url_for("log_in"))
 
         # prefer password_hash only
-        stored_hash = row.get("Password")
-        if not stored_hash:
+        stored_password = row.get("Password")
+        stored_hash = row.get("password_hash")
+        if not (stored_hash or stored_password):
             logger.info(
                 "Login attempt for user=%s but account missing password_hash", username
             )
@@ -151,7 +160,7 @@ def log_in():
             )
             return redirect(url_for("log_in"))
 
-        if not verify_password(password, stored_hash):
+        if not verify_password(password, stored_hash, stored_password):
             logger.info("Failed login for username=%s", username)
             flash("Invalid credentials", "danger")
             return redirect(url_for("log_in"))

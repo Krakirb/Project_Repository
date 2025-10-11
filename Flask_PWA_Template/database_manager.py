@@ -49,6 +49,15 @@ def get_listing_by_category(category_id: int) -> List[Tuple]:
     conn.close()
     return rows
 
+def get_listing_by_category_and_search(category_id: int, searchtext: str) -> List[Tuple]:
+    conn = _get_conn()
+    cur = conn.cursor()
+    searchquery = f"%{searchtext}%"
+    rows = cur.execute(
+        "SELECT * FROM Listings WHERE Category_ID = ? AND Title LIKE ?", (category_id, searchquery)
+    ).fetchall()
+    conn.close()
+    return rows
 
 def get_attraction_by_listing_id(listing_id: int) -> Optional[Dict[str, Any]]:
     conn = _get_conn()

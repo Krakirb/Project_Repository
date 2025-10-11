@@ -4,29 +4,29 @@
 <section class="search">
   <div class="search-content"></div>
   <h2>Start your journey</h2>
-  <form class="search-form" method="GET" action="/search">
-    <input type="text" name="q" placeholder="Search..." />
+  <form class="search-form" method="POST" action="{{ url_for('index') }}">
+    <input type="text" name="searchtext" placeholder="Search..." />
     <button type="submit">Search</button>
   </form>
 </section>
 <h2>Attractions</h2>
 <div class="container">
-  {% for row in attractions %}
-  <a
-    class="card-link-wrapper"
-    href="{{ url_for('listing_detail', listing_id=row['Listings_ID']) }}"
-  >
-    <div class="card">
-      <img
-        class="card-image"
-        src="{{ row['Image'] }}"
-        alt="Image of {{ row['Title'] }} not loaded."
-      />
-      <h1 class="card-name">{{ row['Title'] }}</h1>
-      <p class="card-about">{{ row['Description'] }}</p>
-    </div>
-  </a>
-  {% endfor %}
+    {% for row in attractions %}
+    <a
+      class="card-link-wrapper"
+      href="{{ url_for('listing_detail', listing_id=row['Listings_ID']) }}"
+    >
+      <div class="card">
+        <img
+          class="card-image"
+          src="{{ row['Image'] }}"
+          alt="Image of {{ row['Title'] }} not loaded."
+        />
+        <h1 class="card-name">{{ row['Title'] }}</h1>
+        <p class="card-about">{{ row['Description'] }}</p>
+      </div>
+    </a>
+    {% endfor %}
 </div>
 <h2>Restaurants</h2>
 <div class="container">
