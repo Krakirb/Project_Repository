@@ -55,6 +55,20 @@
       <p class="post-card-username">{{ row[''] }}</p>
       <p class="post-card-date">{{ row['Date'] }}</p>
       <p class="post-card-text">{{ row['Text'] }}</p>
+      <div class="post-actions">
+      <button type="button"
+              class="like-btn"
+              data-review-id="{{ row['Post_ID'] }}"
+              aria-pressed="{{ 'true' if (row['LikedByCurrentUser'] > 0) else 'false' }}"
+              title="Like review">
+        <svg width="32px" height="32px" viewBox="0 0 32 32" id="icon" xmlns="http://www.w3.org/2000/svg">
+        <defs><style>.cls-1 {fill: none;}</style></defs>
+        <path d="M26,12H20V6a3.0033,3.0033,0,0,0-3-3H14.8672a2.0094,2.0094,0,0,0-1.98,1.7173l-.8453,5.9165L8.4648,16H2V30H23a7.0078,7.0078,0,0,0,7-7V16A4.0045,4.0045,0,0,0,26,12ZM8,28H4V18H8Zm20-5a5.0057,5.0057,0,0,1-5,5H10V17.3027l3.9578-5.9365L14.8672,5H17a1.0008,1.0008,0,0,1,1,1v8h8a2.0025,2.0025,0,0,1,2,2Z" transform="translate(0 0)"/>
+        <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
+        </svg>
+        <span class="like-count">{{ row['Likes_Count'] or 0 }}</span>
+    </button>
+  </div>
     </div>
   {% endfor %}
 </div>
@@ -66,6 +80,61 @@
   }).addTo(map);
   L.marker([{{ listing.Latitude }}, {{ listing.Longitude }}]).addTo(map)
     .bindPopup('{{ listing.Title }}');
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Attach to all existing like buttons
+    document.querySelectorAll('.like-btn').forEach(btn => attachLikeHandler(btn));
+  });
+
+  function attachLikeHandler(btn) {
+    btn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const reviewId = btn.dataset.reviewId;
+      if (!reviewId) return;
+
+      // optimistic UI: disable while request in flight
+      btn.disabled = true;
+
+      // If already liked, you may want to toggle/unlike - adjust endpoint accordingly
+      const alreadyLiked = btn.classList.contains('liked');
+
+      try {
+        const res = await fetch(`/review/${encodeURIComponent(reviewId)}/like`, {
+          method: 'POST',
+          headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+            // If you use CSRF protection, include token header here, e.g.
+            // "X-CSRFToken": window.CSRF_TOKEN
+          },
+          body: JSON.stringify({ toggle: true }) // server may ignore body; adjust to your API
+        });
+
+        const data = await res.json();
+
+        if (!res.ok || data.status !== 'success') {
+          // show message on failure
+          alert(data.message || 'Could not update like. Please try again.');
+        } else {
+          // update UI using server response
+          const likes = data.likes;
+          const liked = !!data.liked; // true if now liked
+
+          // set button state and count
+          btn.classList.toggle('liked', liked);
+          btn.setAttribute('aria-pressed', liked ? 'true' : 'false');
+          const countSpan = btn.querySelector('.like-count');
+          if (countSpan) countSpan.textContent = String(likes);
+        }
+      } catch (err) {
+        console.error(err);
+        alert('Network error — could not send like.');
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  }
+
 </script>
 </div>
 

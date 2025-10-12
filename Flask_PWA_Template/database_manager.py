@@ -113,12 +113,20 @@ def get_images_for_listing(listing_id: int) -> List[str]:
 
 # Posts for Listing
 
-def get_post_by_listing(listings_id: int) -> List[Tuple]:
+def get_post_by_listing(listings_id: int, user_id: int) -> List[Tuple]:
     conn = _get_conn()
     cur = conn.cursor()
-    rows = cur.execute(
-        "SELECT Text,Post_Rating,Date,Likes_Count,Comments_Count,Username FROM Posts JOIN Users ON Posts.User_ID = Users.User_ID WHERE Listings_ID = ?", (listings_id,)
-    ).fetchall()
+    query = """
+        SELECT Posts.Post_ID, Text, Post_Rating, Date, Likes_Count, Comments_Count, Username, 
+        CASE WHEN Likes.User_ID IS NOT NULL THEN 1 ELSE 0 END AS LikedByCurrentUser
+        FROM Posts 
+        JOIN Users ON Posts.User_ID = Users.User_ID
+        LEFT JOIN Likes 
+            ON Likes.Post_ID = Posts.Post_ID 
+            AND Likes.User_ID = ?
+        WHERE Posts.Listings_ID = ?
+    """
+    rows = cur.execute(query, (user_id, listings_id)).fetchall()
     conn.close()
     return rows
 
@@ -138,6 +146,15 @@ def get_db_connection():
     conn = sql.connect(DB_PATH)
     conn.row_factory = sql.Row
     return conn
+
+def LikedByCurrentUser(post_id: int, user_id: int) -> bool:
+    conn = _get_conn()
+    cur = conn.cursor()
+    row = cur.execute(
+        "SELECT * FROM Likes WHERE Post_ID = ? AND User_ID = ?", (post_id, user_id)
+    ).fetchone()
+    conn.close()
+    return row is not None
 
 # User
 

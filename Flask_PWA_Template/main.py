@@ -222,7 +222,7 @@ def listing_detail(listing_id):
         return redirect(url_for("index"))
 
     images = db.get_images_for_listing(listing_id)
-    posts = db.get_post_by_listing(listing_id)
+    posts = db.get_post_by_listing(listing_id, current_user.id if current_user.is_authenticated else None)
     average_rating = db.get_average_rating(listing_id)
     rating_count = db.get_rating_count(listing_id)
     category_id = listing.get("Category_ID")
