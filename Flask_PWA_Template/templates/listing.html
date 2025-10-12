@@ -99,7 +99,7 @@
       const alreadyLiked = btn.classList.contains('liked');
 
       try {
-        const res = await fetch(`/review/${encodeURIComponent(reviewId)}/like`, {
+        const res = await fetch('/review/' + encodeURIComponent(reviewId) + '/like', {
           method: 'POST',
           headers: {
             "Accept": "application/json",

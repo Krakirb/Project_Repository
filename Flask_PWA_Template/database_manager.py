@@ -147,14 +147,43 @@ def get_db_connection():
     conn.row_factory = sql.Row
     return conn
 
-def LikedByCurrentUser(post_id: int, user_id: int) -> bool:
+
+def toggle_review_like(post_id: int, user_id: int) -> bool:
+    conn = _get_conn()
+    cur = conn.cursor()
+    existing = cur.execute(
+        "SELECT * FROM Likes WHERE Post_ID = ? AND User_ID = ?", (post_id, user_id)
+    ).fetchone()
+    if existing:
+        cur.execute(
+            "DELETE FROM Likes WHERE Post_ID = ? AND User_ID = ?", (post_id, user_id)
+        )
+        cur.execute(
+            "UPDATE Posts SET Likes_Count = Likes_Count - 1 WHERE Post_ID = ?", (post_id,)
+        )
+        conn.commit()
+        conn.close()
+        return False  # Now unliked
+    else:
+        cur.execute(
+            "INSERT INTO Likes (Post_ID, User_ID) VALUES (?, ?)", (post_id, user_id)
+        )
+        cur.execute(
+            "UPDATE Posts SET Likes_Count = Likes_Count + 1 WHERE Post_ID = ?", (post_id,)
+        )
+        conn.commit()
+        conn.close()
+        return True  # Now liked
+    
+
+def get_review_likes_count(post_id: int) -> int:
     conn = _get_conn()
     cur = conn.cursor()
     row = cur.execute(
-        "SELECT * FROM Likes WHERE Post_ID = ? AND User_ID = ?", (post_id, user_id)
+        "SELECT Likes_Count FROM Posts WHERE Post_ID = ?", (post_id,)
     ).fetchone()
     conn.close()
-    return row is not None
+    return row["Likes_Count"] if row else 0
 
 # User
 

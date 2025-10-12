@@ -2,7 +2,7 @@ import os
 import logging
 from urllib.parse import urlparse, urljoin
 
-from flask import Flask, render_template, request, redirect, url_for, flash, abort, session
+from flask import Flask, jsonify, render_template, request, redirect, url_for, flash, abort, session
 from jinja2 import TemplateNotFound
 from flask_login import (
     LoginManager,
@@ -250,6 +250,16 @@ def listing_detail(listing_id):
         category_label=category_label,
         rating_count=rating_count,
     )
+
+@app.route('/review/<int:review_id>/like', methods=['POST'])
+@login_required
+def like_review(review_id):
+    user_id = current_user.get_id()
+    # toggle like: if exists -> remove, else -> add
+    liked = db.toggle_review_like(review_id, user_id)  # return True if liked now
+    likes = db.get_review_likes_count(review_id)
+    return jsonify({"status":"success", "likes": likes, "liked": liked})
+
 
 from flask import render_template, abort
 import os
