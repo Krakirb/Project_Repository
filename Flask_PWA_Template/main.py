@@ -147,7 +147,6 @@ def log_in():
             flash("Invalid credentials", "danger")
             return redirect(url_for("log_in"))
 
-        # prefer password_hash only
         stored_password = row.get("Password")
         stored_hash = row.get("password_hash")
         if not (stored_hash or stored_password):
@@ -218,11 +217,39 @@ def add_review(listing_id):
 @app.route("/listing/<int:listing_id>")
 def listing_detail(listing_id):
     listing = db.get_listing_by_id(listing_id)
+    if listing is None:
+        flash("Listing not found.", "danger")
+        return redirect(url_for("index"))
+
     images = db.get_images_for_listing(listing_id)
     posts = db.get_post_by_listing(listing_id)
     average_rating = db.get_average_rating(listing_id)
+    rating_count = db.get_rating_count(listing_id)
+    category_id = listing.get("Category_ID")
 
-    return render_template("listing.html", listing=listing, images=images, posts=posts, average_rating=average_rating)
+    if category_id == 1:
+        related = db.get_all_from_table("Attractions")
+        category_label = "Attractions"
+    elif category_id == 2:
+        related = db.get_all_from_table("Restaurants")
+        category_label = "Restaurants"
+    elif category_id == 3:
+        related = db.get_all_from_table("Accommodations")
+        category_label = "Accommodations"
+    else:
+        related = []
+        category_label = "Other"
+
+    return render_template(
+        "listing.html",
+        listing=listing,
+        images=images,
+        posts=posts,
+        average_rating=average_rating,
+        related=related,
+        category_label=category_label,
+        rating_count=rating_count,
+    )
 
 from flask import render_template, abort
 import os

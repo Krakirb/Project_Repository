@@ -29,6 +29,12 @@ def get_all_listings() -> List[Dict[str, Any]]:
     conn.close()
     return [dict(r) for r in rows]
 
+def get_all_from_table(tablename: str):
+    conn = _get_conn()
+    cur = conn.cursor()
+    rows = cur.execute(f"SELECT * FROM {tablename} LIMIT 6").fetchall()
+    conn.close()
+    return rows
 
 def get_listing_by_id(listing_id: int) -> Optional[Dict[str, Any]]:
     conn = _get_conn()
@@ -54,7 +60,7 @@ def get_listing_by_category_and_search(category_id: int, searchtext: str) -> Lis
     cur = conn.cursor()
     searchquery = f"%{searchtext}%"
     rows = cur.execute(
-        "SELECT * FROM Listings WHERE Category_ID = ? AND Title LIKE ?", (category_id, searchquery)
+       """SELECT * FROM Listings WHERE Category_ID = ? AND (Title LIKE ? OR Location LIKE ? OR Description LIKE ?)""", (category_id, searchquery, searchquery, searchquery)
     ).fetchall()
     conn.close()
     return rows
@@ -76,6 +82,15 @@ def get_average_rating(listing_id: int) -> Optional[float]:
     ).fetchone()
     conn.close()
     return row["avg_rating"] if row and row["avg_rating"] is not None else None
+
+def get_rating_count(listing_id: int) -> int:
+    conn = _get_conn()
+    cur = conn.cursor()
+    row = cur.execute(
+        "SELECT COUNT(*) as rating_count FROM Posts WHERE Listings_ID = ?", (listing_id,)
+    ).fetchone()
+    conn.close()
+    return row["rating_count"] if row else 0
 
 def get_images_for_listing(listing_id: int) -> List[str]:
     conn = _get_conn()

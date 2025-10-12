@@ -1,13 +1,5 @@
 {% extends 'layout.html' %} {% block content %}
 
-<div class="gallery">
-  {% for url in images %}
-  <div class="gallery-item">
-    <img src="{{ url }}" alt="Photo of {{ listing.Title }} #{{ loop.index }}" />
-  </div>
-  {% endfor %}
-</div>
-
 <div class="hero-info">
   <h1>{{ listing.Title or listing.Title }}</h1>
   
@@ -23,6 +15,7 @@
       {% endif %}
     {% endfor %}
     <span class="rating-text">{{ average_rating | round(1) }}/5</span>
+    <span class="rating-text">({{ rating_count }} reviews)</span>
     {% endif %}
   </div>
 
@@ -31,7 +24,15 @@
   <p class="opening-hours">Opening Hours: {{ listing.Opening_Hours }}</p>
   <p class="description">{{ listing.Description }}</p>
 </div>
+<div class="gallery">
+  {% for url in images %}
+  <div class="gallery-item">
+    <img src="{{ url }}" alt="Photo of {{ listing.Title }} #{{ loop.index }}" />
+  </div>
+  {% endfor %}
+</div>
 
+<div class="listing-post-section">
 <div class="post-container">
   {# listing.html, inside hero-info or near posts #}
   <div>
@@ -56,6 +57,16 @@
       <p class="post-card-text">{{ row['Text'] }}</p>
     </div>
   {% endfor %}
+</div>
+<div id="map" class="map-container"></div>
+<script>
+  var map = L.map('map').setView([{{ listing.Latitude }}, {{ listing.Longitude }}], 15);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+  L.marker([{{ listing.Latitude }}, {{ listing.Longitude }}]).addTo(map)
+    .bindPopup('{{ listing.Title }}');
+</script>
 </div>
 
 {% endblock %}

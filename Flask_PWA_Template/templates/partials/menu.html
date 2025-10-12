@@ -4,15 +4,16 @@
     <ul class="topnav">
     <li><a href="/index.html">Home</a></li>
     <li><a href="/add.html">Attractions</a></li>
-    <li><a href="/about.html">About</a></li>
+    <li><a href="/about.html">Restaurants</a></li>
+    <li><a href="/about.html">Accommodation</a></li>
 
   </ul>
   <div>
     {% if current_user.is_authenticated %}
     Welcome  {{current_user.username}}
-    <a href="/log_out"><button>Sign Out</button></a>
+    <a href="/log_out"><button>Log Out</button></a>
     {% else %}
-    <a href="/log_in.html"><button>Sign In</button></a>
+    <a href="/log_in.html"><button>Log In</button></a>
     <a href="/register.html"><button>Register</button></a>
     {% endif %}
     </div>
