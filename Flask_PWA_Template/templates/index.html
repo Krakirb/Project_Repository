@@ -68,4 +68,20 @@
 
   {% endfor %}
 </div>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const container = document.getElementById("attraction-container");
+    const leftBtn = container.parentElement.querySelector(".scroll-btn.left");
+    const rightBtn = container.parentElement.querySelector(".scroll-btn.right");
+
+    const scrollAmount = container.clientWidth; // scroll 1 full view width (≈3 cards)
+
+    leftBtn.addEventListener("click", () => {
+      container.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+    });
+    rightBtn.addEventListener("click", () => {
+      container.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    });
+  });
+</script>
 {% endblock %}

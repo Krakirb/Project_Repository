@@ -83,9 +83,9 @@ def index():
         restaurants = db.get_listing_by_category_and_search(2,searchtext=searchtext)
         accommodations = db.get_listing_by_category_and_search(3,searchtext=searchtext)
     else:
-        attractions = db.get_listing_by_category(1)
-        restaurants = db.get_listing_by_category(2)
-        accommodations = db.get_listing_by_category(3)
+        attractions = db.get_listing_by_category(1, row_limit=9)
+        restaurants = db.get_listing_by_category(2, row_limit=9)
+        accommodations = db.get_listing_by_category(3, row_limit=9)
     return render_template(
         "index.html",
         attractions=attractions,
@@ -233,9 +233,7 @@ def listing_detail(listing_id):
     elif category_id == 2:
         related = db.get_all_from_table("Restaurants")
         category_label = "Restaurants"
-    elif category_id == 3:
-        related = db.get_all_from_table("Accommodations")
-        category_label = "Accommodations"
+
     else:
         related = []
         category_label = "Other"
@@ -260,6 +258,26 @@ def like_review(review_id):
     likes = db.get_review_likes_count(review_id)
     return jsonify({"status":"success", "likes": likes, "liked": liked})
 
+@app.route('/attractions.html', methods=['GET'])
+def attractions():
+    attractions = db.get_listing_by_category(1, row_limit=99)
+    return render_template(
+        "attractions.html",
+        attractions=attractions,)
+
+@app.route('/restaurants.html', methods=['GET'])
+def restaurants():
+    restaurants = db.get_listing_by_category(2, row_limit=99)
+    return render_template(
+        "restaurants.html",
+        restaurants=restaurants,)
+
+@app.route('/accommodation.html', methods=['GET'])
+def accommodation():
+    accommodation = db.get_listing_by_category(3, row_limit=99)
+    return render_template(
+        "accommodation.html",
+        accommodation=accommodation,)
 
 from flask import render_template, abort
 import os

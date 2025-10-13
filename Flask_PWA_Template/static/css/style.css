@@ -359,7 +359,7 @@ body {
 }
 
 .post-container {
-  max-width: 800px;
+  width: 800px;
   margin: 40px 0px;
   display: flex;
   flex-direction: column;

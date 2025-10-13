@@ -46,11 +46,11 @@ def get_listing_by_id(listing_id: int) -> Optional[Dict[str, Any]]:
     return dict(row) if row else None
 
 
-def get_listing_by_category(category_id: int) -> List[Tuple]:
+def get_listing_by_category(category_id: int, row_limit: int) -> List[Tuple]:
     conn = _get_conn()
     cur = conn.cursor()
     rows = cur.execute(
-        "SELECT * FROM Listings WHERE Category_ID = ?", (category_id,)
+        "SELECT * FROM Listings WHERE Category_ID = ? LIMIT ?", (category_id, row_limit)
     ).fetchall()
     conn.close()
     return rows
