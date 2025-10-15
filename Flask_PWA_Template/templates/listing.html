@@ -80,20 +80,21 @@
     .bindPopup('{{ listing.Title }}');
 
   document.addEventListener('DOMContentLoaded', () => {
-    // Attach to all existing like buttons
     document.querySelectorAll('.like-btn').forEach(btn => attachLikeHandler(btn));
   });
 
   function attachLikeHandler(btn) {
     btn.addEventListener('click', async (e) => {
       e.preventDefault();
+      {% if not current_user.is_authenticated %}
+    alert('You must be logged in to like.');
+    return;  
+    {% endif %}
       const reviewId = btn.dataset.reviewId;
       if (!reviewId) return;
 
-      // optimistic UI: disable while request in flight
       btn.disabled = true;
 
-      // If already liked, you may want to toggle/unlike - adjust endpoint accordingly
       const alreadyLiked = btn.classList.contains('liked');
 
       try {
@@ -102,10 +103,8 @@
           headers: {
             "Accept": "application/json",
             "Content-Type": "application/json"
-            // If you use CSRF protection, include token header here, e.g.
-            // "X-CSRFToken": window.CSRF_TOKEN
           },
-          body: JSON.stringify({ toggle: true }) // server may ignore body; adjust to your API
+          body: JSON.stringify({ toggle: true })
         });
 
         const data = await res.json();
@@ -114,7 +113,6 @@
           // show message on failure
           alert(data.message || 'Could not update like. Please try again.');
         } else {
-          // update UI using server response
           const likes = data.likes;
           const liked = !!data.liked; // true if now liked
 

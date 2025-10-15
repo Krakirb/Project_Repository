@@ -113,6 +113,9 @@ def register():
             return redirect(url_for("register"))
 
         hashed = hash_password(password)
+        if db.check_user_exists(username=username):
+            flash("Username already taken", "danger")
+            return redirect(url_for("register"))
         user_id = db.create_user(username=username, email=email, password_hash=hashed)
 
         if not user_id:
@@ -153,10 +156,6 @@ def log_in():
             logger.info(
                 "Login attempt for user=%s but account missing password_hash", username
             )
-            flash(
-                "Account requires password reset. Please use password reset flow.",
-                "danger",
-            )
             return redirect(url_for("log_in"))
 
         if not verify_password(password, stored_hash, stored_password):
@@ -166,7 +165,7 @@ def log_in():
 
         user = User(row)
         login_user(user, remember=remember)
-        flash("Logged in successfully", "success")
+        # flash("Logged in successfully", "success")
 
         next_page = request.args.get("next")
         if not next_page or not is_safe_url(next_page):
@@ -180,7 +179,7 @@ def log_in():
 @login_required
 def logout():
     logout_user()
-    flash("You have been logged out", "info")
+    # flash("You have been logged out", "info")
     return redirect(url_for("index"))
 
 
@@ -206,11 +205,11 @@ def add_review(listing_id):
         if rating < 1 or rating > 5:
             raise ValueError
     except (TypeError, ValueError):
-        flash("Invalid rating. Please provide a rating between 1 and 5.", "danger")
+        # flash("Invalid rating. Please provide a rating between 1 and 5.", "danger")
         return redirect(url_for("listing_detail", listing_id=listing_id))
 
     db.add_post(user_id=current_user.id, listing_id=listing_id, rating=rating, comment=comment)
-    flash("Review added successfully.", "success")
+    # flash("Review added successfully.", "success")
     return redirect(url_for("listing_detail", listing_id=listing_id))
 
 

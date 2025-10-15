@@ -27,6 +27,9 @@ Initial draft example location/reviews design.
 | Typography | Inter Font Used |
 | Colour Scheme | Used Hex Code Colours #61892F #222629 |
 
+
+
+
 # Algorithim Design
 
 ## Flowchart:
@@ -96,3 +99,23 @@ TODO (10/10):
 
 Issue with service worker:
 Because it was loading from /stat/js, service worker would only run for everything under static/js, so defined within main.pyy, a route that loaded it from /, increasing scope.
+
+
+
+(10/25)
+- 
+
+
+
+
+Likes Fuctioning:
+- Required a 
+
+Search Function
+
+Register
+
+Login
+
+Password Hashing
+

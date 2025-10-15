@@ -248,3 +248,12 @@ def get_user_by_id(user_id: int) -> Optional[Dict[str, Any]]:
     conn.close()
     return dict(row) if row else None
 
+def check_user_exists(username: str,) -> bool:
+    conn = _get_conn()
+    cur = conn.cursor()
+    cur.execute(
+        "SELECT 1 FROM Users WHERE Username = ?", (username,)
+    )
+    exists = cur.fetchone() is not None
+    conn.close()
+    return exists

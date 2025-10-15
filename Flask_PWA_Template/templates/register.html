@@ -31,6 +31,17 @@
         <button type="submit" class="btn btn-primary">Register</button>
       </div>
     </form>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flashes">
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
 
     <p class="register-muted">
       Already have an account? <a href="{{ url_for('log_in') }}">Log in</a>
@@ -38,18 +49,4 @@
   </div>
 </section>
 
-<script>
-  (function () {
-    const form = document.querySelector('form[action="{{ url_for("register") }}"]');
-    if (!form) return;
-    form.addEventListener('submit', function (e) {
-      const p = form.querySelector('#password').value;
-      const c = form.querySelector('#confirm').value;
-      if (p !== c) {
-        e.preventDefault();
-        alert('Passwords do not match.');
-      }
-    });
-  })();
-</script>
 {% endblock %}

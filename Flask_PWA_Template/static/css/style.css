@@ -162,7 +162,6 @@ input[type="text"] {
   justify-content: center;
   align-items: flex-start;
   min-height: 80vh;
-  background-color: #fafafa;
   padding: 3rem 1rem;
 }
 
@@ -182,6 +181,12 @@ input[type="text"] {
   margin-bottom: 1.5rem;
   color: #003135;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.flashes {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #910000;
+  padding: 20px;
 }
 
 .form-row {
@@ -455,7 +460,6 @@ body {
   justify-content: flex-start;
   align-items: flex-start;
   padding: 2rem;
-  background-color: #fafafa;
   min-height: 80vh;
 }
 
