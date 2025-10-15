@@ -92,3 +92,7 @@ TODO (10/10):
 - Edit own reviews
 
 - Final Checklistd
+
+
+Issue with service worker:
+Because it was loading from /stat/js, service worker would only run for everything under static/js, so defined within main.pyy, a route that loaded it from /, increasing scope.

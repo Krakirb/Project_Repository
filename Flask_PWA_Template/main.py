@@ -249,14 +249,18 @@ def listing_detail(listing_id):
         rating_count=rating_count,
     )
 
+from flask import request
+
 @app.route('/review/<int:review_id>/like', methods=['POST'])
 @login_required
 def like_review(review_id):
+    data = request.get_json(silent=True) or {}
+    toggle = data.get("toggle", False)
+    # you can use `toggle` if you want to control behavior
     user_id = current_user.get_id()
-    # toggle like: if exists -> remove, else -> add
-    liked = db.toggle_review_like(review_id, user_id)  # return True if liked now
+    liked = db.toggle_review_like(review_id, user_id)
     likes = db.get_review_likes_count(review_id)
-    return jsonify({"status":"success", "likes": likes, "liked": liked})
+    return jsonify({"status": "success", "likes": likes, "liked": liked})
 
 @app.route('/attractions.html', methods=['GET'])
 def attractions():
@@ -288,6 +292,10 @@ from jinja2 import TemplateNotFound
 def register_html_redirect():
     return redirect(url_for("register"))
 
+@app.route('/serviceworker.js')
+def service_worker():
+    return app.send_static_file('js/serviceworker.js')
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=5000)
+    
