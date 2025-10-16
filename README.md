@@ -1,6 +1,6 @@
-# Project Definition
+# Week 1: Project Definition and Requirements
 
-The goal is to create a functioning web application for a client. Through ensuring that both frontend and backend are able to function and communicate well, and making sure that all functional and non functional requirements have been completed. This web application is created for the goal of aiding travelers in planning and booking travels, as well as providing a platform for users to share advice, travel experinces and reviews. If possible, the website will also provide anonymity.
+The goal of this project is to create a functioning web application for a client. Through ensuring that both frontend and backend are able to function and communicate well, and making sure that all functional and non functional requirements have been completed. This web application is created for the goal of aiding travelers in planning and booking travels, as well as providing a platform for users to share advice, travel experinces and reviews. If possible, the website will also provide anonymity.
 
 
 # Functional and Non-Functional Requirements
@@ -25,10 +25,28 @@ Initial draft example location/reviews design.
 | Design Element      | Choice |
 | :---:        |    :----:   |
 | Typography | Inter Font Used |
-| Colour Scheme | Used Hex Code Colours #61892F #222629 |
+| Colour Palete | Used Hex Code Colours #61892F #222629, similar to those found in logo |
+| Image/Icon Choice | Used Colours similar to the ones in the logo for images #61892F #222629 |
 
+# Alternative App Design
+Alternative Homepage design.
 
+![Home](Stored_Stuff/AltHomepage.png)
 
+Alternative example location/reviews design.
+
+![Review](Stored_Stuff/AltReviewsPage.png)
+
+Alternative login page design.
+
+![Login](Stored_Stuff/AltLogin.png)
+
+| Design Element Changes    | Choice |
+| :---:        |    :----:   |
+| Typography | Verdana Font Used Instead |
+| Colour Palete | Used Instead #024950 #fffff, primarily |
+| Image/Icon Choice | Used Colours more suited to the new Palete|
+| Misc | Search Bar added to front page, different naviation layout along with product page layout|
 
 # Algorithim Design
 
@@ -109,13 +127,23 @@ Because it was loading from /stat/js, service worker would only run for everythi
 
 
 Likes Fuctioning:
-- Required a 
+- Required ajax
+- Ascynchronus cal returing json rather than a page, updating only one thgin rather than refreshing
+- Addition and subtracting logic, updating likes coun & user liked
 
 Search Function
+- Updating Querey adding a where clause
 
 Register
+- Check for duplicates
+- Flashing for any messages, qued up until shown, however, it didn't matter, shows messages to user from app 
 
 Login
+- Password Hashing teset whrer youinserted date wo a pasword  "JOhn", when registered now hash
 
-Password Hashing
+# Testing Instructions (Hi Mr Clark)
+Download code, load into VSCode and within the Flask_PWA_Template directory, run main.py 
+
+Testing Username: MrClark
+Testing Password: MrClark
 

@@ -205,8 +205,8 @@ def add_review(listing_id):
         if rating < 1 or rating > 5:
             raise ValueError
     except (TypeError, ValueError):
-        # flash("Invalid rating. Please provide a rating between 1 and 5.", "danger")
-        return redirect(url_for("listing_detail", listing_id=listing_id))
+        flash("Invalid review. Please provide a rating.", "danger")
+        return redirect(url_for("add_review", listing_id=listing_id))
 
     db.add_post(user_id=current_user.id, listing_id=listing_id, rating=rating, comment=comment)
     # flash("Review added successfully.", "success")

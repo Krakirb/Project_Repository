@@ -125,6 +125,7 @@ def get_post_by_listing(listings_id: int, user_id: int) -> List[Tuple]:
             ON Likes.Post_ID = Posts.Post_ID 
             AND Likes.User_ID = ?
         WHERE Posts.Listings_ID = ?
+        ORDER BY Date DESC
     """
     rows = cur.execute(query, (user_id, listings_id)).fetchall()
     conn.close()

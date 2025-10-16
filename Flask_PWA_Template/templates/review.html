@@ -24,7 +24,17 @@
       <label for="comment" class="form-label">Your Review</label>
       <textarea id="comment" name="comment" rows="6" required placeholder="Share your experience..."></textarea>
     </div>
-
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="flashes">
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+{% endwith %}
     <div class="form-actions">
       <button type="submit" class="btn-primary">Submit Review</button>
       <a class="btn-secondary" href="{{ url_for('listing_detail', listing_id=listing['Listings_ID'] if listing is mapping else listing.Listings_ID) }}">Cancel</a>
