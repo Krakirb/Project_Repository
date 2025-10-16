@@ -52,7 +52,7 @@ Alternative login page design.
 
 ## Flowchart:
 
-![Flowchart](Stored_Stuff/Algorthim_Flowchart.png)
+https://lucid.app/lucidchart/151fd39a-d6df-430d-9cd2-ddd4e4774965/edit?viewport_loc=718%2C198%2C1654%2C655%2C0_0&invitationId=inv_16486a7e-650c-42fe-a038-29f885dedcb3
 
 ## Test Case 1:
 
