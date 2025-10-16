@@ -116,48 +116,50 @@ VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 # Creation and Styling of Webpages
 **Steps Completed (With difficulty)**
 - Initial setup of pages and styling, with main elements put in place
+- Style.css implemented, nav, card class and menu styled
 
+Homepage
 ![First Draft](<Stored_Stuff/Screenshot 2025-09-18 111037.png>)
-# App Design
 
-TODO (10/10):
-- Limit number of listings on main page
+# App Design, Adding Interactivity (The Hardest Part)
+**Initial To Do:**
+- Limit number of listings on main page (Completed)
+- Likes (Completed)
 - Listings by type
 - Profile Page
 - Fix Date
-- Integrate Rego
+- Integrate Rego/Login (Completed)
 - Business Profile add listings
-- (Maybe) Search Bar for Listing
-- Edit own reviews
+- (Maybe) Search Bar for Listing (Completed)
+- Review Page (Completed)
 
-- Final Checklistd
+**Likes Fuctioning Completed:**
+- Required ajax to complete (actual agony)
+- Ascynchronus call returing json rather than a page, updating only one thing rather than refreshing
+- Addition and subtracting logic, updating likes count & user liked within database
 
+**Search Function**
+- Updating Querey while adding a where clause, fairly easy
 
-Issue with service worker:
-Because it was loading from /stat/js, service worker would only run for everything under static/js, so defined within main.pyy, a route that loaded it from /, increasing scope.
+**Register**
+- Required flashing for any messages, quened up until shown, however flashes would appear in other places, commented out unnecessary flashes
 
+**Login**
+- Password Hashing wasn't intially implemented (See User John)
+- Later implemented required login in likes, and reviews
 
+**Limiting Listings**
+- Completed vis styling
 
-(10/25)
-- 
+**Map Implmentation**
+- Did not work with google maps (that requires an API and other services unavailable to education accounts)
 
+**Reviews**
+- Later migrated a within page form to a seperate reviews page
 
-
-
-Likes Fuctioning:
-- Required ajax
-- Ascynchronus cal returing json rather than a page, updating only one thgin rather than refreshing
-- Addition and subtracting logic, updating likes coun & user liked
-
-Search Function
-- Updating Querey adding a where clause
-
-Register
-- Check for duplicates
-- Flashing for any messages, qued up until shown, however, it didn't matter, shows messages to user from app 
-
-Login
-- Password Hashing teset whrer youinserted date wo a pasword  "JOhn", when registered now hash
+# Final Steps
+- Lighthouse Reports - Fixed UX requirements, for some reason deprecated API appeared with regards to the Event Listener
+- Service Worker and Offline Capability added
 
 # Testing Instructions (Hi Mr Clark)
 Download code, load into VSCode and within the Flask_PWA_Template directory, run main.py 
