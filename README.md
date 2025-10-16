@@ -97,7 +97,7 @@ https://lucid.app/lucidchart/151fd39a-d6df-430d-9cd2-ddd4e4774965/edit?viewport_
 # Setting up development environment
 
 ## Database Setup and SQL
-**First Steps Copleted (With difficulty)**
+**Steps Completed (With difficulty)**
 - All Extensions Installed
 - Forked template repository
 - Setup file strucutre including static, working documents, templates, main.py and database_manager.py
@@ -113,7 +113,11 @@ Example SQL:
 Insert into Listings (Location, Title, Description, Image, Category_ID, Date_entered, Address, Website, Latitude, Longitude)
 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 
+# Creation and Styling of Webpages
+**Steps Completed (With difficulty)**
+- Initial setup of pages and styling, with main elements put in place
 
+![First Draft](<Stored_Stuff/Screenshot 2025-09-18 111037.png>)
 # App Design
 
 TODO (10/10):
