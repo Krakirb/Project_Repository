@@ -149,7 +149,7 @@ Homepage
 - Later implemented required login in likes, and reviews
 
 **Limiting Listings**
-- Completed vis styling
+- Completed via styling
 
 **Map Implmentation**
 - Did not work with google maps (that requires an API and other services unavailable to education accounts)

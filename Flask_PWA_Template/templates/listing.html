@@ -110,13 +110,11 @@
         const data = await res.json();
 
         if (!res.ok || data.status !== 'success') {
-          // show message on failure
           alert(data.message || 'Could not update like. Please try again.');
         } else {
           const likes = data.likes;
-          const liked = !!data.liked; // true if now liked
+          const liked = !!data.liked;
 
-          // set button state and count
           btn.classList.toggle('liked', liked);
           btn.setAttribute('aria-pressed', liked ? 'true' : 'false');
           const countSpan = btn.querySelector('.like-count');

@@ -164,7 +164,7 @@ def toggle_review_like(post_id: int, user_id: int) -> bool:
         )
         conn.commit()
         conn.close()
-        return False  # Now unliked
+        return False
     else:
         cur.execute(
             "INSERT INTO Likes (Post_ID, User_ID) VALUES (?, ?)", (post_id, user_id)
@@ -174,7 +174,7 @@ def toggle_review_like(post_id: int, user_id: int) -> bool:
         )
         conn.commit()
         conn.close()
-        return True  # Now liked
+        return True
     
 
 def get_review_likes_count(post_id: int) -> int:
