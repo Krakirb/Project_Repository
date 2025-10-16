@@ -96,8 +96,22 @@ https://lucid.app/lucidchart/151fd39a-d6df-430d-9cd2-ddd4e4774965/edit?viewport_
 
 # Setting up development environment
 
-## Competed Steps:
-- 
+## Database Setup and SQL
+**First Steps Copleted (With difficulty)**
+- All Extensions Installed
+- Forked template repository
+- Setup file strucutre including static, working documents, templates, main.py and database_manager.py
+
+**SQL queries/Tables Created include:**
+Intial Table Setup:
+![alt text](<Stored_Stuff/Screenshot 2025-10-16 113546.png>)
+
+Tables would pull from listings, and data would be pulled from LLMs with the exception of images.
+
+Example SQL: 
+
+Insert into Listings (Location, Title, Description, Image, Category_ID, Date_entered, Address, Website, Latitude, Longitude)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 
 
 # App Design
