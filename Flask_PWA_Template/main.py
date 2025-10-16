@@ -255,7 +255,6 @@ from flask import request
 def like_review(review_id):
     data = request.get_json(silent=True) or {}
     toggle = data.get("toggle", False)
-    # you can use `toggle` if you want to control behavior
     user_id = current_user.get_id()
     liked = db.toggle_review_like(review_id, user_id)
     likes = db.get_review_likes_count(review_id)

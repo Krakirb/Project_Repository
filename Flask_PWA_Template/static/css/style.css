@@ -435,7 +435,6 @@ body {
   transition: fill 0.3s ease;
 }
 
-/* When liked */
 .like-btn.liked {
   background-color: #024950;
     color: white;
