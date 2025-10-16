@@ -135,6 +135,7 @@ Homepage
 
 **Likes Fuctioning Completed:**
 - Required ajax to complete (actual agony)
+- Issues with returning a full HTML response
 - Ascynchronus call returing json rather than a page, updating only one thing rather than refreshing
 - Addition and subtracting logic, updating likes count & user liked within database
 
@@ -149,7 +150,7 @@ Homepage
 - Later implemented required login in likes, and reviews
 
 **Limiting Listings**
-- Completed via styling
+- Completed via styling the container
 
 **Map Implmentation**
 - Did not work with google maps (that requires an API and other services unavailable to education accounts)
