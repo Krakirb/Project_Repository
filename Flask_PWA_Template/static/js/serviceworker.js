@@ -9,9 +9,18 @@ const assets = [
   "/static/icons/icon-384x384.png",
   "/static/icons/icon-512x512.png",
   "/static/icons/desktop_screenshot.png",
+  "/static/images/listings/Colosseum_Image.jpg",
+  "/static/images/listings/Eiffel_Tower.jpg",
+  "/static/images/listings/Opera_House_Image.jpg",
   "/index.html",
   "/attractions.html",
-  "/listing/1"
+  "/restaurants.html",
+  "/accommodation.html",
+  "/log_in.html",
+  "/register.html",
+  "/review.html",
+  "/listing/1",
+  "/listing/2",
 ];
 
 const CATALOGUE_ASSETS = "catalogue-assets-v2";
