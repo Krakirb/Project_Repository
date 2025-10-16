@@ -226,13 +226,6 @@ def listing_detail(listing_id):
     rating_count = db.get_rating_count(listing_id)
     category_id = listing.get("Category_ID")
 
-    if category_id == 1:
-        related = db.get_all_from_table("Attractions")
-        category_label = "Attractions"
-    elif category_id == 2:
-        related = db.get_all_from_table("Restaurants")
-        category_label = "Restaurants"
-
     else:
         related = []
         category_label = "Other"
