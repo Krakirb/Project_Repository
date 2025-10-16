@@ -14,9 +14,9 @@ const assets = [
   "/listing/1"
 ];
 
-const CATALOGUE_ASSETS = "catalogue-assets";
+const CATALOGUE_ASSETS = "catalogue-assets-v2";
 
-self.addEventListener("install", (installEvt) => {
+/* self.addEventListener("install", (installEvt) => {
   installEvt.waitUntil(
     caches
       .open(CATALOGUE_ASSETS)
@@ -29,6 +29,21 @@ self.addEventListener("install", (installEvt) => {
       .catch((e) => {
         console.log(e);
       })
+  );
+});
+*/
+
+self.addEventListener("fetch", (evt) => {
+  evt.respondWith(
+    fetch(evt.request)
+      .then((response) => {
+        if (evt.request.method === "GET" && response.status === 200) {
+          const clone = response.clone();
+          caches.open(CATALOGUE_ASSETS).then((cache) => cache.put(evt.request, clone));
+        }
+        return response;
+      })
+      .catch(() => caches.match(evt.request))
   );
 });
 

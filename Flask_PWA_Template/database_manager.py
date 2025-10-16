@@ -134,8 +134,8 @@ def get_post_by_listing(listings_id: int, user_id: int) -> List[Tuple]:
 def add_post(user_id, listing_id, rating, comment):
     """Insert a new review (post) into the Posts table."""
     query = """
-        INSERT INTO Posts (User_ID, Text, Post_Rating, Date, Reply_To_Post_ID, Likes_Count, Comments_Count, Images, Listings_ID)
-        VALUES (?, ?, ?, CURRENT_DATE, NULL, 0, 0, NULL, ?)
+        INSERT INTO Posts (User_ID, Text, Post_Rating, Date, Likes_Count, Comments_Count, Listings_ID)
+        VALUES (?, ?, ?, CURRENT_DATE, 0, 0, ?)
     """
     conn = get_db_connection()
     cursor = conn.cursor()
