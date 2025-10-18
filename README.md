@@ -168,3 +168,5 @@ Download code, load into VSCode and within the Flask_PWA_Template directory, run
 Testing Username: MrClark
 Testing Password: MrClark
 
+# Acknowledgements
+I would like to credit my classmates, my teacher, my parents, StackOverflow, ChatGPT, and other online forums for aiding in/providing information on how to complete this project.
